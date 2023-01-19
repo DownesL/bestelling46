@@ -1,0 +1,138 @@
+:root {
+    --background: #212121;
+    --primary: #DDDDDD;
+    --hover: #333333;
+    --green: #1e941e;
+    --red: #941e1e;
+}
+
+html {
+    font-family: 'Nunito Sans', sans-serif;
+}
+
+header {
+    background: var(--background);
+    color: var(--primary);
+    height: 12rem;
+    padding: 1rem;
+    display: flex;
+    align-items: flex-end;
+}
+
+header h1 {
+    margin: 1rem;
+}
+
+main {
+    padding: 2rem;
+}
+
+.restaurants {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1rem;
+    margin-top: 2rem;
+}
+
+.restaurant {
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    transition: all 200ms ease-in-out;
+    box-shadow: 0 4px 26px 16px #2121214f;
+}
+
+.restaurant:hover {
+    background: var(--hover);
+    color: var(--primary);
+    box-shadow: 0 4px 26px 16px #212121CC;
+}
+
+.restaurant p {
+    margin: 0;
+}
+
+.restaurant p:last-of-type {
+    margin-bottom: 1rem;
+}
+
+.restaurant a {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    align-items: flex-end;
+    color: currentColor;
+    padding: 1rem;
+}
+
+.restaurant .text {
+    padding: 1rem;
+}
+
+.restaurant h3 {
+    margin-bottom: 0.5rem;
+}
+
+.restaurant img {
+    object-fit: cover;
+    width: 100%;
+    aspect-ratio: 16/10;
+    order: -1;
+}
+
+.restaurant form {
+    position: absolute;
+    bottom: 17%;
+    right: 1rem;
+}
+
+.restaurant form span {
+    text-align: center;
+}
+
+.restaurant form button {
+    background: none;
+    color: currentColor;
+    border: none;
+    font-weight: 600;
+}
+
+.restaurant form span.upvote,
+.restaurant form button[title="upvote"]:hover,
+.restaurant form button[title="upvote"].upvote {
+    color: var(--green);
+}
+.restaurant form span.downvote,
+.restaurant form button[title="downvote"]:hover,
+.restaurant form button[title="downvote"].downvote  {
+    color: var(--red);
+}
+
+
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+.errors {
+    color: red;
+}
+@media (min-width: 500px) {
+    .restaurants {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+@media (min-width: 900px) {
+    .restaurants {
+        grid-template-columns: 1fr 1fr 1fr;
+    }
+}
+@media (min-width: 1200px) {
+    .restaurants {
+        grid-template-columns: 1fr 1fr 1fr 1fr;
+    }
+}

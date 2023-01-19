@@ -8,5 +8,5 @@ define('DB_HOST', 'mysqldb'); // specify an IP address, localhost or a computer 
 define('DB_USER', 'root');
 define('DB_PASS', 'Azerty123');
 
-define('DB_NAME', 'demo');
+define('DB_NAME', 'bestelling46');
 define('DEBUG', true);

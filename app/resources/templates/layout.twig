@@ -1,1 +1,55 @@
-{# add your Twig template here #}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css"
+          integrity="sha512-NhSC1YmyruXifcj/KFRWoC561YpHpc5Jtzgvbuzx5VozKpWvQ+4nXhPdFgmx8xqexRcpAglTj9sIBWINXa8x5w=="
+          crossorigin="anonymous" referrerpolicy="no-referrer"/>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+            href="https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,wght@0,200;0,300;0,400;0,600;0,700;1,200&display=swap"
+            rel="stylesheet">
+    <link rel="stylesheet" href="{{ url('takeaway/styles.css') }}">
+    <title>TAKEAWAY</title>
+</head>
+<body>
+<header>
+    <h1>Bestelling 46</h1>
+</header>
+<main>
+    <h2>Keuzemogelijkheden</h2>
+    <a href="{{ url('add') }}">Keuze toevoegen</a>
+    <div class="restaurants">
+        {% if choices %}
+            {% for choice in choices %}
+                <section class="restaurant">
+                    <div class="text">
+                        <h3>{{ choice.name }}</h3>
+                        <p>
+                            {% for i in range (1, choice.price_range) %}
+                                €
+                            {% endfor %}
+                        </p>
+                        <p>Min.: €{{ choice.min_delivery_price }}</p>
+                        <p>Fee : €{{ choice.delivery_price }}</p>
+                        <a href="{{ choice.url }}" target="_blank">Link to deliverer</a>
+                    </div>
+                    <img src="{{ url('img/foodOptions/' ~ choice.id ~ '.' ~ choice.ext) }}">
+                    <form action="{{ url('restaurant/' ~ choice.id ~ '/vote') }}" method="post">
+                        <button title="upvote" name="vote" value="upvote" class="{{ choice.vote }}">/\</button>
+                        <span class="{{ choice.vote }}">{{ choice.score }}</span>
+                        <button title="downvote" name="vote" value="downvote" class="{{ choice.vote }}">\/</button>
+                    </form>
+                </section>
+            {% endfor %}
+        {% else %}
+            <p>Voeg een paar keuzes toe</p>
+        {% endif %}
+    </div>
+</main>
+</body>
+</html>

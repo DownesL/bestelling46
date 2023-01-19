@@ -3,4 +3,11 @@
 require_once ('../vendor/autoload.php');
 $router = new \Bramus\Router\Router();
 
-// add your routes and run!
+$router->setNamespace('Http');
+$router->get('/', 'FoodController@show');
+$router->get('/add', 'FoodController@showAdd');
+$router->post('/add', 'FoodController@add');
+$router->post('/restaurant/(\d*)/vote', 'FoodController@vote');
+$router->post('/reset','FoodController@reset');
+
+$router->run();

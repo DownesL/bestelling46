@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css"
+          integrity="sha512-NhSC1YmyruXifcj/KFRWoC561YpHpc5Jtzgvbuzx5VozKpWvQ+4nXhPdFgmx8xqexRcpAglTj9sIBWINXa8x5w=="
+          crossorigin="anonymous" referrerpolicy="no-referrer"/>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+            href="https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,wght@0,200;0,300;0,400;0,600;0,700;1,200&display=swap"
+            rel="stylesheet">
+    <link rel="stylesheet" href="{{ url('takeaway/styles.css') }}">
+    <title>TAKEAWAY</title>
+</head>
+
+<body>
+<header>
+    <h1>Bestelling 46</h1>
+</header>
+<main>
+    <h2>Keuzemogelijkheid toevoegen</h2>
+    {% if errors %}
+        <div class="errors">
+            {% for e in errors %}
+                <p>{{ e }}</p>
+            {% endfor %}
+        </div>
+    {% endif %}
+    <form action="{{ url('add') }}" method="post"
+          enctype="multipart/form-data">
+        <label for="name">Restaurant naam</label>
+        <input type="text" name="name" id="name" value="{{ values.name }}">
+        <label for="price_range">Gemiddelde kost van een gerecht (getal)</label>
+        <input type="text" name="price_range" id="price_range" value="{{ values.price_range }}">
+        <label for="min_delivery_price">Minimum bedrag (getal)</label>
+        <input type="text" name="min_delivery_price" id="min_delivery_price" value="{{ values.min_delivery_price }}">
+        <label for="delivery_price">Leverprijs (getal)</label>
+        <input type="text" name="delivery_price" id="delivery_price" value="{{ values.delivery_price }}">
+        <label for="url">Link naar leveraar (url)</label>
+        <input type="text" name="url" id="url" value="{{ values.url }}">
+        <label for="coverphoto">lekker fotootje</label>
+        <input type="file" name="coverphoto" id="coverphoto">
+        <input type="hidden" name="moduleAction" value="add">
+        <button type="submit">Toevoegen</button>
+    </form>
+</main>
+</body>
+
+</html>
