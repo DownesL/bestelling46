@@ -3,3 +3,4 @@
 .vscode
 docker/mysql-data
 app/.env
+app/vendor
