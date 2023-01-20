@@ -2,10 +2,10 @@
     "require": {
         "doctrine/dbal": "^3.5",
         "twig/twig": "^3.4",
-        "bramus/router": "^1.6"
+        "bramus/router": "^1.6",
+        "vlucas/phpdotenv": "^5.5"
     },
     "autoload": {
-        "classmap": ["src/"],
-        "files": ["config/database.php", "config/app.php"]
+        "classmap": ["src/"]
     }
 }

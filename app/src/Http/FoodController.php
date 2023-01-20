@@ -20,7 +20,7 @@ class FoodController
         $loader = new FilesystemLoader(__DIR__ . '/../../resources/templates');
         $this->twig = new Environment($loader);
         $function = new TwigFunction('url', function ($path) {
-            return BASE_PATH . $path;
+            return $_ENV['BASE_PATH'] . $path;
         });
         $this->twig->addFunction($function);
     }
@@ -61,27 +61,29 @@ class FoodController
         $errors = [];
         if (isset($_POST['moduleAction']) && $_POST['moduleAction'] === 'add') {
             if ($name === "") {
-                $errors[] = 'Voeg een geldige naam toe.';
+                $errors['name'] = 'Voeg een geldige naam toe.';
             }
             if ($url === "") {
-                $errors[] = 'Voeg een geldige url toe.';
+                $errors['url'] = 'Voeg een geldige url toe.';
             }
             if ($price_range < 0 || $price_range > 100) {
-                $errors[] = 'Voeg een geldige prijs in.';
+                $errors['price_range'] = 'Voeg een geldige prijs in.';
             } else {
                 $price_range = ($price_range < 15 ? 1 : ($price_range < 25 ? 2 : 3));
             }
             if (!$min_delivery_price || $min_delivery_price < 0) {
-                $errors[] = 'Voeg een geldige minimale prijs in.';
+                $errors['min_delivery_price'] = 'Voeg een geldige minimale prijs in.';
             }
             if (!$delivery_price || $delivery_price < 0) {
-                $errors[] = 'Voeg een geldige leverprijs in.';
+                $errors['delivery_price'] = 'Voeg een geldige leverprijs in.';
             }
             if (isset($_FILES['coverphoto']) && ($_FILES['coverphoto']['error'] === UPLOAD_ERR_OK)) {
                 $ext = (new SplFileInfo($_FILES['coverphoto']['name']))->getExtension();
                 if (!in_array($ext, ['jpg', 'png', 'gif', 'jpeg'])) {
-                    $errors[] = 'Invalid extension. Only .jpeg, .jpg, .png or .gif allowed';
+                    $errors['coverphoto'] = 'Invalid extension. Only .jpeg, .jpg, .png or .gif allowed';
                 }
+            } else {
+                $errors['coverphoto'] = "Voeg een foto toe.";
             }
 
             if (!$errors) {

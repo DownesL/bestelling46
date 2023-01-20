@@ -22,31 +22,81 @@
     <h1>Bestelling 46</h1>
 </header>
 <main>
-    <h2>Keuzemogelijkheid toevoegen</h2>
-    {% if errors %}
-        <div class="errors">
-            {% for e in errors %}
-                <p>{{ e }}</p>
-            {% endfor %}
-        </div>
-    {% endif %}
     <form action="{{ url('add') }}" method="post"
           enctype="multipart/form-data">
-        <label for="name">Restaurant naam</label>
-        <input type="text" name="name" id="name" value="{{ values.name }}">
-        <label for="price_range">Gemiddelde kost van een gerecht (getal)</label>
-        <input type="text" name="price_range" id="price_range" value="{{ values.price_range }}">
-        <label for="min_delivery_price">Minimum bedrag (getal)</label>
-        <input type="text" name="min_delivery_price" id="min_delivery_price" value="{{ values.min_delivery_price }}">
-        <label for="delivery_price">Leverprijs (getal)</label>
-        <input type="text" name="delivery_price" id="delivery_price" value="{{ values.delivery_price }}">
-        <label for="url">Link naar leveraar (url)</label>
-        <input type="text" name="url" id="url" value="{{ values.url }}">
-        <label for="coverphoto">lekker fotootje</label>
-        <input type="file" name="coverphoto" id="coverphoto">
+        <h2>Keuzemogelijkheid toevoegen</h2>
+        <div
+            {% if errors.name %}
+                class="error"
+            {% endif %}>
+            <label for="name">Restaurant naam</label>
+            <input type="text" name="name" id="name" value="{{ values.name }}" autocomplete="off">
+            {% if errors.name %}
+                <p>{{ errors.name }}</p>
+            {% endif %}
+        </div>
+        <div
+            {% if errors.price_range %}
+                class="error"
+            {% endif %}>
+            <label for="price_range"><def title="Gemiddelde prijs van een hoofdgerecht">Prijs Categorie*</def> (getal)</label>
+            <input type="text" name="price_range" id="price_range" value="{{ values.price_range }}" autocomplete="off">
+            {% if errors.price_range %}
+                <p>{{ errors.price_range }}</p>
+            {% endif %}
+        </div>
+        <div
+            {% if errors.min_delivery_price %}
+                class="error"
+            {% endif %}>
+            <label for="min_delivery_price">Minimum bedrag (getal)</label>
+            <input type="text" name="min_delivery_price" id="min_delivery_price" value="{{ values.min_delivery_price }}"
+                   autocomplete="off">
+            {% if errors.min_delivery_price %}
+                <p>{{ errors.min_delivery_price }}</p>
+            {% endif %}
+        </div>
+        <div
+            {% if errors.delivery_price %}
+                class="error"
+            {% endif %}>
+            <label for="delivery_price">Leverprijs (getal)</label>
+            <input type="text" name="delivery_price" id="delivery_price" value="{{ values.delivery_price }}"
+                   autocomplete="off">
+            {% if errors.delivery_price %}
+                <p>{{ errors.delivery_price }}</p>
+            {% endif %}
+        </div>
+        <div
+            {% if errors.url %}
+                class="error"
+            {% endif %}>
+            <label for="url">Link naar leveraar (url)</label>
+            <input type="text" name="url" id="url" value="{{ values.url }}" autocomplete="off">
+            {% if errors.url %}
+                <p>{{ errors.url }}</p>
+            {% endif %}
+        </div>
+        <div
+            {% if errors.coverphoto %}
+                class="error"
+            {% endif %}>
+            <label for="coverphoto">
+                lekker fotootje
+            </label>
+            <input type="file" name="coverphoto" id="coverphoto" pattern="\w+" placeholder=" ">
+            {% if errors.coverphoto %}
+                <p>{{ errors.coverphoto }}</p>
+            {% endif %}
+        </div>
+
         <input type="hidden" name="moduleAction" value="add">
         <button type="submit">Toevoegen</button>
+        <p>*Gemiddelde prijs van een hoofdgerecht</p>
     </form>
+    <div id="meme">
+
+    </div>
 </main>
 </body>
 
